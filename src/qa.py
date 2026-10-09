@@ -155,9 +155,7 @@ for url, html in pages.items():
     metas[meta] = url
     kind = ("blog" if url.startswith("/blog/") and url != "/blog/" else
             "hub" if url in ("/blog/",) else "money")
-    if kind == "blog" and PHONE in meta:
-        flag(f"phone in blog meta (must be phone-free): {url}")
-    if kind == "money" and PHONE not in meta:
+    if PHONE not in meta:
         flag(f"phone missing from meta: {url}")
     # canonical + h1 count + heading order
     if f'<link rel="canonical" href="{DOMAIN}{url}">' not in html:

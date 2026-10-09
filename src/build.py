@@ -41,7 +41,8 @@ main{display:block}
 .nav{background:var(--card);border-bottom:1px solid rgba(0,0,0,.08);position:sticky;top:0;z-index:50}
 .nav .wrap{display:flex;align-items:center;gap:26px;padding-top:12px;padding-bottom:12px}
 .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px}
-.logo .mark{width:38px;height:38px;border-radius:10px;background:var(--brand);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:18px;flex:none}
+.logo .mark{width:38px;height:38px;flex:none;display:block}
+.logo .mark svg{display:block;width:38px;height:38px}
 .logo small{display:block;font-weight:600;font-size:11px;letter-spacing:3px;color:var(--muted)}
 .nav-links{display:flex;gap:20px;margin-left:auto;font-size:15px;font-weight:600;align-items:center;list-style:none}
 .nav-links>li>a{color:var(--ink);padding:6px 2px;display:inline-block}
@@ -55,23 +56,27 @@ main{display:block}
 .nav-cta{background:var(--cta);color:var(--cta-ink)!important;font-weight:700;padding:9px 20px!important;border-radius:8px;white-space:nowrap}
 .nav-cta:hover{background:var(--cta-dark);color:var(--cta-ink)!important}
 .nav-toggle{display:none;background:none;border:0;font-size:26px;cursor:pointer;color:var(--ink);margin-left:auto}
-/* hero */
-.hero{background:linear-gradient(135deg,var(--hero-a),var(--hero-b));color:#fff;padding:70px 0;position:relative;overflow:hidden}
-.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(600px 300px at 80% 20%,rgba(255,255,255,.14),transparent)}
-.hero .wrap{position:relative;z-index:1}
-.eyebrow{display:inline-block;font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--cta);margin-bottom:14px}
-.hero h1{font-size:42px;line-height:1.15;max-width:660px;margin-bottom:16px}
-.hero .lede{max-width:620px;font-size:18px;opacity:.93;margin-bottom:28px}
+/* hero - flashy: relevant photo behind content */
+.hero{position:relative;overflow:hidden;color:#fff;padding:90px 0}
+.hero-bg{position:absolute;inset:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;display:block}
+.hero-shade{position:absolute;inset:0;background:linear-gradient(100deg,rgba(8,45,50,.95) 15%,rgba(8,45,50,.62) 55%,rgba(8,45,50,.28))}
+.hero-content{position:relative;z-index:1}
+.eyebrow{display:inline-block;font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#fff;margin-bottom:14px;border:1px solid rgba(255,255,255,.45);background:rgba(232,113,58,.25);padding:7px 16px;border-radius:999px}
+.hero h1{font-size:42px;line-height:1.15;max-width:680px;margin-bottom:16px;text-shadow:0 2px 14px rgba(0,0,0,.45)}
+.hero .lede{max-width:620px;font-size:18px;opacity:.94;margin-bottom:28px;text-shadow:0 1px 8px rgba(0,0,0,.4)}
 .hero .ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:26px}
-.trustrow{display:flex;gap:26px;flex-wrap:wrap;font-size:14px;font-weight:600}
+.trustrow{display:flex;gap:12px;flex-wrap:wrap;font-size:14px;font-weight:600}
+.trustrow span{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);padding:8px 16px;border-radius:999px}
 .trustrow span::before{content:"\\2713  ";color:var(--cta);font-weight:800}
 .crumbs{font-size:13px;color:var(--muted);padding:16px 0 0}
 .crumbs a{color:var(--brand)}
 .crumbs a:hover{text-decoration:underline}
 /* buttons */
-.btn{display:inline-block;background:var(--cta);color:var(--cta-ink);font-weight:700;padding:12px 26px;border-radius:8px;font-size:16px}
-.btn:hover{background:var(--cta-dark)}
-.btn.ghost{background:transparent;color:#fff;border:2px solid #fff}
+.btn{display:inline-block;background:var(--cta);color:var(--cta-ink);font-weight:700;padding:12px 26px;border-radius:8px;font-size:16px;box-shadow:0 8px 22px rgba(232,113,58,.35);transition:transform .2s ease,box-shadow .2s ease,background .2s ease}
+.btn:hover{background:var(--cta-dark);transform:translateY(-2px);box-shadow:0 12px 28px rgba(232,113,58,.45)}
+.btn.ghost{background:rgba(255,255,255,.08);color:#fff;border:2px solid #fff;box-shadow:none}
+.btn.ghost:hover{background:rgba(255,255,255,.18);transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,.3)}
 /* sections */
 section.block{padding:60px 0}
 .prose{max-width:780px}
@@ -85,6 +90,8 @@ section.block{padding:60px 0}
 .prose a:hover{text-decoration:underline}
 .split{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:start}
 .sticky-visual{position:sticky;top:96px;border-radius:14px;min-height:420px;background:linear-gradient(160deg,var(--hero-a),var(--hero-b));display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.8);font-size:13px;letter-spacing:2px;text-align:center;padding:20px}
+.sticky-visual.has-photo{padding:0;overflow:hidden;background:none}
+.sticky-visual.has-photo img{width:100%;height:100%;object-fit:cover;display:block;min-height:420px}
 /* cards / grids */
 .sec-head{max-width:720px;margin-bottom:32px}
 .sec-head h2{font-size:30px;margin-bottom:10px}
@@ -95,6 +102,18 @@ section.block{padding:60px 0}
 .card h3 a:hover{color:var(--brand)}
 .card p{font-size:15px;color:var(--muted);flex:1}
 .card .more{margin-top:14px;color:var(--brand);font-weight:700;font-size:15px}
+/* flashy image cards */
+.card.pic{padding:0;overflow:hidden;box-shadow:0 6px 20px rgba(10,61,66,.10);transition:transform .25s ease,box-shadow .25s ease}
+.card.pic:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(10,61,66,.18)}
+.card-pic{display:block;aspect-ratio:16/10;overflow:hidden;position:relative}
+.card-pic::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(8,45,50,.35))}
+.card-pic img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease}
+.card.pic:hover .card-pic img{transform:scale(1.06)}
+.card-body{padding:22px;display:flex;flex-direction:column;flex:1}
+.card-body h3{font-size:18px;margin-bottom:8px}
+.card-body h3 a:hover{color:var(--brand)}
+.card-body p{font-size:15px;color:var(--muted);flex:1}
+.card-body .more{margin-top:14px;color:var(--brand);font-weight:700;font-size:15px}
 /* pills */
 .pills{display:flex;flex-wrap:wrap;gap:10px}
 .pill{background:var(--card);border:1px solid rgba(0,0,0,.1);padding:9px 18px;border-radius:999px;font-size:14px;font-weight:600}
@@ -126,6 +145,8 @@ footer{background:var(--deep);color:#fff;padding:48px 0 24px;font-size:14px}
   .grid{grid-template-columns:1fr 1fr}
   .split{grid-template-columns:1fr}
   .sticky-visual{position:static;min-height:220px}
+  .sticky-visual.has-photo img{min-height:220px}
+  .hero{padding:64px 0}
   .hero h1{font-size:32px}
   .nav-toggle{display:block}
   .nav-links{display:none;flex-direction:column;align-items:stretch;position:absolute;top:100%;left:0;right:0;background:var(--card);padding:12px 20px 20px;border-bottom:1px solid rgba(0,0,0,.1);gap:4px}
@@ -143,7 +164,7 @@ if(t&&m){t.addEventListener('click',function(){m.classList.toggle('open');});}
 });
 </script>"""
 
-FAVICON_SVG = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#0A3D42"/><text x="32" y="44" font-family="Arial,sans-serif" font-size="36" font-weight="bold" fill="#FFFFFF" text-anchor="middle">S</text><path d="M14 50 Q32 56 50 50" stroke="#E8713A" stroke-width="4" fill="none" stroke-linecap="round"/></svg>"""
+FAVICON_SVG = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="15" fill="#0A3D42"/><path d="M20 45V30a11 11 0 0 1 11-11h13" fill="none" stroke="#FFFFFF" stroke-width="9" stroke-linecap="round"/><path d="M13 52.5q6.5-5.5 13 0t13 0 13 0" fill="none" stroke="#E8713A" stroke-width="5" stroke-linecap="round"/></svg>"""
 
 # ---------------- content registry ----------------
 ALLOWED_TAGS = {"p", "h3", "ul", "ol", "li", "strong", "a", "em"}
@@ -163,9 +184,13 @@ def load_registry():
         reg[d["url_path"]] = d
     return reg
 
+SERVICE_ORDER = ["trenchless-sewer-repair","sewer-line-replacement","pipe-bursting",
+"cipp-pipe-lining","sewer-camera-inspection","emergency-sewer-repair","tree-root-removal",
+"hydro-jetting","commercial-sewer-services","septic-to-sewer-conversion","sewer-odor-detection"]
+
 def services(reg):
     return sorted([d for d in reg.values() if d["kind"] == "service"],
-                  key=lambda d: d["url_path"])
+                  key=lambda d: SERVICE_ORDER.index(d["slug"]))
 
 def locations(reg):
     return sorted([d for d in reg.values() if d["kind"] == "location"],
@@ -291,7 +316,7 @@ def nav_html(reg):
         f'<li><a href="{d["url_path"]}">{esc(d["area_label"])}</a></li>'
         for d in locations(reg))
     return f"""<nav class="nav" aria-label="Main"><div class="wrap">
-<a class="logo" href="/" aria-label="{esc(BIZ)} home"><span class="mark">S</span><span>{esc(BIZ)}<small>SARASOTA, FL</small></span></a>
+<a class="logo" href="/" aria-label="{esc(BIZ)} home"><span class="mark"><svg viewBox="0 0 44 44" aria-hidden="true"><rect width="44" height="44" rx="11" fill="#0A3D42"/><path d="M14 31V21a8 8 0 0 1 8-8h9" fill="none" stroke="#FFFFFF" stroke-width="6.5" stroke-linecap="round"/><path d="M9 36.5q5-4.5 10 0t10 0 10 0" fill="none" stroke="#E8713A" stroke-width="3.6" stroke-linecap="round"/></svg></span><span>{esc(BIZ)}<small>SARASOTA, FL</small></span></a>
 <button class="nav-toggle" aria-label="Open menu">&#9776;</button>
 <ul class="nav-links">
 <li><a href="/">Home</a></li>
@@ -328,29 +353,146 @@ def cta_band():
 
 def head_html(d, ld_blocks, extra=""):
     og_type = "article" if d["kind"] == "blog" else "website"
+    hero = HERO_IMG[d["url_path"]]
+    hero_abs = f"{DOMAIN}/images/{hero}.webp"
     return f"""<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{esc(d["title"])}</title>
 <meta name="description" content="{esc(d["meta"])}">
 <link rel="canonical" href="{DOMAIN}{d["url_path"]}">
+<link rel="preload" as="image" href="/images/{hero}.webp" fetchpriority="high">
 <meta property="og:title" content="{esc(d["title"])}">
 <meta property="og:description" content="{esc(d["meta"])}">
 <meta property="og:type" content="{og_type}">
 <meta property="og:url" content="{DOMAIN}{d["url_path"]}">
 <meta property="og:site_name" content="{esc(BIZ)}">
+<meta property="og:image" content="{hero_abs}">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="853">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="{esc(d["title"])}">
 <meta name="twitter:description" content="{esc(d["meta"])}">
+<meta name="twitter:image" content="{hero_abs}">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon-64.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <style>{CSS}</style>
 {ld_scripts(ld_blocks)}
 {NAV_JS}
 {extra}</head>"""
 
-def hero_html(d, trust_items):
+# ---------------- image maps (verified webp, truthful filenames) ----------------
+HERO_IMG = {
+ "/": "trenchless-drilling-rig",
+ "/services/": "trenchless-drilling-rig",
+ "/services/trenchless-sewer-repair/": "trenchless-drilling-rig",
+ "/services/pipe-bursting/": "pipe-bursting-head",
+ "/services/cipp-pipe-lining/": "cipp-pipe-lining",
+ "/services/sewer-camera-inspection/": "sewer-camera-inspection",
+ "/services/sewer-line-replacement/": "excavation-pipe-replacement",
+ "/services/tree-root-removal/": "tree-root-removal",
+ "/services/hydro-jetting/": "hydro-jetting",
+ "/services/sewer-odor-detection/": "sewer-camera-inspection",
+ "/services/emergency-sewer-repair/": "work-van-technician",
+ "/services/commercial-sewer-services/": "excavation-pipe-replacement",
+ "/services/septic-to-sewer-conversion/": "septic-tank-install",
+ "/locations/": "siesta-key-beach",
+ "/locations/downtown-sarasota-34236/": "downtown-sarasota",
+ "/locations/st-armands-lido-key/": "st-armands-circle",
+ "/locations/siesta-key-34242/": "siesta-key-beach",
+ "/locations/longboat-key-34228/": "barrier-island-aerial",
+ "/locations/gulf-gate-34231/": "suburban-street-live-oaks",
+ "/locations/bee-ridge-34233/": "suburban-street-live-oaks",
+ "/locations/southgate-pinecraft-34239/": "suburban-street-live-oaks",
+ "/locations/north-sarasota-34234/": "suburban-street-live-oaks",
+ "/locations/palmer-ranch-34238/": "suburban-street-live-oaks",
+ "/locations/fruitville-34232/": "suburban-street-live-oaks",
+ "/locations/bradenton/": "downtown-sarasota",
+ "/locations/venice/": "siesta-key-beach",
+ "/locations/north-port/": "suburban-street-live-oaks",
+ "/locations/osprey-nokomis/": "barrier-island-aerial",
+ "/blog/": "trenchless-drilling-rig",
+ "/blog/cast-iron-sewer-pipe-sarasota-slab-homes/": "pipe-bursting-head",
+ "/blog/rainy-season-sewer-backups-sarasota/": "suburban-street-live-oaks",
+ "/blog/trenchless-vs-traditional-sewer-repair/": "trenchless-drilling-rig",
+ "/blog/tree-roots-sewer-lines-sarasota/": "tree-root-removal",
+ "/blog/sewer-camera-inspection-what-to-expect/": "sewer-camera-inspection",
+ "/blog/signs-sewer-line-failure/": "sewer-camera-inspection",
+ "/blog/septic-to-sewer-conversion-sarasota-county/": "septic-tank-install",
+ "/blog/pipe-bursting-vs-pipe-lining/": "cipp-pipe-lining",
+ "/blog/siesta-key-barrier-island-sewer-challenges/": "barrier-island-aerial",
+ "/blog/hydro-jetting-vs-snaking/": "hydro-jetting",
+ "/about/": "work-van-technician",
+ "/contact/": "downtown-sarasota",
+ "/privacy-policy/": "suburban-street-live-oaks",
+ "/terms-of-service/": "downtown-sarasota",
+}
+STICKY_IMG = {
+ "/": "suburban-street-live-oaks",
+ "/services/": "pipe-bursting-head",
+ "/services/trenchless-sewer-repair/": "pipe-bursting-head",
+ "/services/pipe-bursting/": "excavation-pipe-replacement",
+ "/services/cipp-pipe-lining/": "trenchless-drilling-rig",
+ "/services/sewer-camera-inspection/": "hydro-jetting",
+ "/services/sewer-line-replacement/": "pipe-bursting-head",
+ "/services/tree-root-removal/": "sewer-camera-inspection",
+ "/services/hydro-jetting/": "sewer-camera-inspection",
+ "/services/sewer-odor-detection/": "work-van-technician",
+ "/services/emergency-sewer-repair/": "hydro-jetting",
+ "/services/commercial-sewer-services/": "work-van-technician",
+ "/services/septic-to-sewer-conversion/": "excavation-pipe-replacement",
+ "/locations/": "downtown-sarasota",
+ "/locations/downtown-sarasota-34236/": "siesta-key-beach",
+ "/locations/st-armands-lido-key/": "barrier-island-aerial",
+ "/locations/siesta-key-34242/": "st-armands-circle",
+ "/locations/longboat-key-34228/": "siesta-key-beach",
+ "/locations/gulf-gate-34231/": "downtown-sarasota",
+ "/locations/bee-ridge-34233/": "siesta-key-beach",
+ "/locations/southgate-pinecraft-34239/": "st-armands-circle",
+ "/locations/north-sarasota-34234/": "downtown-sarasota",
+ "/locations/palmer-ranch-34238/": "barrier-island-aerial",
+ "/locations/fruitville-34232/": "siesta-key-beach",
+ "/locations/bradenton/": "suburban-street-live-oaks",
+ "/locations/venice/": "barrier-island-aerial",
+ "/locations/north-port/": "downtown-sarasota",
+ "/locations/osprey-nokomis/": "siesta-key-beach",
+ "/blog/": "cipp-pipe-lining",
+ "/blog/cast-iron-sewer-pipe-sarasota-slab-homes/": "tree-root-removal",
+ "/blog/rainy-season-sewer-backups-sarasota/": "downtown-sarasota",
+ "/blog/trenchless-vs-traditional-sewer-repair/": "cipp-pipe-lining",
+ "/blog/tree-roots-sewer-lines-sarasota/": "pipe-bursting-head",
+ "/blog/sewer-camera-inspection-what-to-expect/": "work-van-technician",
+ "/blog/signs-sewer-line-failure/": "hydro-jetting",
+ "/blog/septic-to-sewer-conversion-sarasota-county/": "excavation-pipe-replacement",
+ "/blog/pipe-bursting-vs-pipe-lining/": "pipe-bursting-head",
+ "/blog/siesta-key-barrier-island-sewer-challenges/": "siesta-key-beach",
+ "/blog/hydro-jetting-vs-snaking/": "sewer-camera-inspection",
+ "/about/": "downtown-sarasota",
+ "/contact/": "work-van-technician",
+ "/privacy-policy/": "downtown-sarasota",
+ "/terms-of-service/": "suburban-street-live-oaks",
+}
+STICKY_ALT = {
+ "trenchless-drilling-rig": "Trenchless drilling rig set up over an entry pit at a Sarasota home",
+ "pipe-bursting-head": "Pipe bursting head pulling new HDPE pipe through sandy soil",
+ "cipp-pipe-lining": "Cured-in-place pipe liner being installed at a Sarasota jobsite",
+ "sewer-camera-inspection": "Technician running a sewer camera inspection at a Florida home",
+ "excavation-pipe-replacement": "Open-trench sewer line replacement with new PVC pipe in Sarasota",
+ "tree-root-removal": "Tree roots clogging a broken clay sewer pipe",
+ "hydro-jetting": "Hydro jetting hose cleaning a residential sewer cleanout",
+ "siesta-key-beach": "Siesta Key Beach, Sarasota, Florida",
+ "downtown-sarasota": "Downtown Sarasota bayfront",
+ "st-armands-circle": "St. Armands Circle, Sarasota",
+ "suburban-street-live-oaks": "Sarasota suburban street with mature live oaks",
+ "barrier-island-aerial": "Aerial view of a Florida Gulf Coast barrier island",
+ "work-van-technician": "Plumbing service van at a Sarasota home",
+ "septic-tank-install": "Septic tank installation in Sarasota",
+}
+
+def hero_html(d, trust_items, bg_img):
     trust = "".join(f"<span>{ihtml.escape(t)}</span>" for t in trust_items)
-    return f"""<header class="hero"><div class="wrap">
+    return f"""<header class="hero"><div class="hero-bg" aria-hidden="true"><img src="/images/{bg_img}.webp" alt="" fetchpriority="high" width="1280" height="853"></div><div class="hero-shade"></div><div class="wrap hero-content">
 <span class="eyebrow">{esc(d.get("eyebrow") or "Sarasota, FL \u00b7 Sewer Line Specialists")}</span>
 <h1>{esc(d["h1"])}</h1>
 <p class="lede">{esc(d["hero_sub"])}</p>
@@ -373,7 +515,7 @@ def sections_html(d, split_from=1):
         body = "".join(f'<h2>{esc(s["h2"])}</h2>{sanitize_html(s["html"])}' for s in secs[1:])
         out.append(f'<section class="block" style="background:var(--card)"><div class="wrap">'
                    f'<div class="split"><div class="prose">{body}</div>'
-                   f'<aside class="sticky-visual">PHOTO<br>PLACEHOLDER</aside>'
+                   f'<aside class="sticky-visual has-photo"><img src="/images/{STICKY_IMG[d["url_path"]]}.webp" alt="{STICKY_ALT[STICKY_IMG[d["url_path"]]]}" width="1280" height="853" loading="lazy"></aside>'
                    f'</div></div></section>')
     return "\n".join(out)
 
@@ -416,8 +558,10 @@ def by_slug(reg, kind, slug):
 
 def card_grid(items, more_text="Learn more"):
     cards = "".join(
-        f'<div class="card"><h3><a href="{d["url_path"]}">{esc(label)}</a></h3>'
-        f'<p>{esc(blurb)}</p><a class="more" href="{d["url_path"]}">{more_text} &rarr;</a></div>'
+        f'<div class="card pic"><a class="card-pic" href="{d["url_path"]}" aria-label="{esc(label)}">'
+        f'<img src="/images/{HERO_IMG[d["url_path"]]}.webp" alt="{esc(label)}" loading="lazy" width="1280" height="853"></a>'
+        f'<div class="card-body"><h3><a href="{d["url_path"]}">{esc(label)}</a></h3>'
+        f'<p>{esc(blurb)}</p><a class="more" href="{d["url_path"]}">{more_text} &rarr;</a></div></div>'
         for d, label, blurb in items)
     return f'<div class="grid">{cards}</div>'
 
@@ -533,11 +677,14 @@ def contact_extra(d):
 # ---------------- page assembler ----------------
 def render_page(d, reg):
     crumbs = crumbs_for(d)
-    crumb_html = ('<div class="wrap"><nav class="crumbs" aria-label="Breadcrumb">'
-                  + " &rsaquo; ".join(
-                      f'<a href="{p}">{esc(n)}</a>' if p != d["url_path"]
-                      else f'<span>{esc(n)}</span>' for n, p in crumbs)
-                  + "</nav></div>")
+    # no visible breadcrumb on the homepage (it would just say "Home")
+    crumb_html = ""
+    if d["url_path"] != "/":
+        crumb_html = ('<div class="wrap"><nav class="crumbs" aria-label="Breadcrumb">'
+                      + " &rsaquo; ".join(
+                          f'<a href="{p}">{esc(n)}</a>' if p != d["url_path"]
+                          else f'<span>{esc(n)}</span>' for n, p in crumbs)
+                      + "</nav></div>")
     ld = [ld_breadcrumbs(crumbs)]
     if d.get("faqs"):
         ld.append(ld_faq(d["faqs"]))
@@ -572,7 +719,7 @@ def render_page(d, reg):
 {nav_html(reg)}
 {crumb_html}
 <main>
-{hero_html(d, TRUST_DEFAULT)}
+{hero_html(d, TRUST_DEFAULT, HERO_IMG[d["url_path"]])}
 {sections_html(d)}
 {body_extra}
 {faq_html(d)}
@@ -610,6 +757,25 @@ def write_favicon():
     with open(os.path.join(DIST, "favicon.svg"), "w") as f:
         f.write(FAVICON_SVG)
 
+def write_favicon_pngs():
+    from PIL import Image, ImageDraw
+    import math
+    def draw_mark(size):
+        s = float(size) / 44.0
+        im = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+        dr = ImageDraw.Draw(im)
+        dr.rounded_rectangle([0, 0, size, size], radius=int(11 * s), fill="#0A3D42")
+        w = max(1, int(6.5 * s))
+        dr.line([(14 * s, 31 * s), (14 * s, 21 * s)], fill="white", width=w)
+        dr.arc([14 * s, 13 * s, 30 * s, 29 * s], start=180, end=270, fill="white", width=w)
+        dr.line([(22 * s, 13 * s), (31 * s, 13 * s)], fill="white", width=w)
+        ww = max(1, int(3.6 * s))
+        pts = [(x * s, (36.5 - 2.25 * math.sin(2 * math.pi * (x - 9) / 10)) * s)
+               for x in range(9, 40)]
+        dr.line(pts, fill="#E8713A", width=ww, joint="curve")
+        return im
+    draw_mark(64).save(os.path.join(DIST, "favicon-64.png"))
+    draw_mark(180).save(os.path.join(DIST, "apple-touch-icon.png"))
 def main():
     reg = load_registry()
     print(f"loaded {len(reg)} pages")
@@ -618,6 +784,7 @@ def main():
     n = write_sitemap(reg)
     write_robots()
     write_favicon()
+    write_favicon_pngs()
     print(f"wrote {n} pages + sitemap.xml + robots.txt + favicon.svg to dist/")
 
 if __name__ == "__main__":
